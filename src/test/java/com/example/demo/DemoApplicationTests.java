@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -13,13 +14,15 @@ class DemoApplicationTests {
 	@MockBean
 	private AutowiredDependency autowiredDependency;
 
+	@Autowired
+	private BeanToTest beanToTest;
+
 	@Test
 	void contextLoads() {
 	}
 
 	@Test
 	public void test() {
-		BeanToTest beanToTest = new BeanToTest(autowiredDependency);
 		when(autowiredDependency.generate()).thenReturn("test");
 		assertEquals("1test", beanToTest.doSomething());
 	}
